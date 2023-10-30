@@ -298,13 +298,13 @@ const Toast: FC<ToastProps> = (props) => {
   };
 
   if (swipeEnabled) {
-    animationStyle.transform?.push(
+   Array.isArray(animationStyle.transform) && animationStyle.transform?.push(
       getPanResponderAnim().getTranslateTransform()[0]
     );
   }
 
   if (animationType === "zoom-in") {
-    animationStyle.transform?.push({
+    Array.isArray(animationStyle.transform) &&  animationStyle.transform?.push({
       scale: animation.interpolate({
         inputRange: [0, 1],
         outputRange: [0.7, 1],

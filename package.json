@@ -20,7 +20,7 @@
     "react-native": "*"
   },
   "devDependencies": {
-    "@react-native-community/bob": "^0.17.1",
+    "react-native-builder-bob": "^0.23.1",
     "@types/react": "~18.0.14",
     "@types/react-native": "^0.71.8",
     "typescript": "^4.9.4"
@@ -40,7 +40,7 @@
     "animation",
     "message"
   ],
-  "@react-native-community/bob": {
+  "react-native-builder-bob": {
     "source": "src",
     "output": "lib",
     "targets": [
@@ -53,5 +53,7 @@
       "module",
       "typescript"
     ]
+  },
+  "dependencies": {
   }
 }
