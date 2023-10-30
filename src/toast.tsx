@@ -209,10 +209,14 @@ const Toast: FC<ToastProps> = (props) => {
 
   const getPanResponder = () => {
     if (panResponderRef.current) return panResponderRef.current;
+    const swipeThreshold = Platform.OS === "android" ? 10 : 0;
     panResponderRef.current = PanResponder.create({
       onMoveShouldSetPanResponder: (_, gestureState) => {
         //return true if user is swiping, return false if it's a single click
-        return !(gestureState.dx === 0 && gestureState.dy === 0);
+        return (
+          Math.abs(gestureState.dx) > swipeThreshold ||
+          Math.abs(gestureState.dy) > swipeThreshold
+        );
       },
       onPanResponderMove: (_, gestureState) => {
         getPanResponderAnim()?.setValue({
@@ -310,10 +314,10 @@ const Toast: FC<ToastProps> = (props) => {
 
   return (
     <Animated.View
+      pointerEvents={"box-none"}
       ref={containerRef}
       {...(swipeEnabled ? getPanResponder().panHandlers : null)}
       style={[styles.container, animationStyle]}
-      pointerEvents={"box-none"}
     >
       {props.renderType && props.renderType[type] ? (
         props.renderType[type](props)
